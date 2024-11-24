@@ -12,13 +12,23 @@ class Ebook(db.Model):
     title = db.Column(db.String(100), nullable=False)
     author = db.Column(db.String(100), nullable=False)
     genre = db.Column(db.String(50))
-    year = db.Column(db.Integer)
+    year = db.Column(db.String(50))
 
 # Home page
 @app.route('/')
 def index():
     ebooks = Ebook.query.all()
     return render_template('index.html', ebooks=ebooks)
+# about
+@app.route('/about')
+def about():
+     return render_template('about.html')
+
+# Manage page
+@app.route('/manage')
+def manage():
+    ebooks = Ebook.query.all()
+    return render_template('manage.html', ebooks=ebooks)
 
 # Add e-book
 @app.route('/add', methods=['GET', 'POST'])
